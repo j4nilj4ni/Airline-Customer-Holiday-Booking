@@ -60,5 +60,8 @@ if st.button('Predict Booking'):
                     flight_duration]]
     
    
-    
-    st.title(pipe.predict(query)[0])
+    if pipe.predict(query)[0] == 0:
+        st.title("Booking Completed")
+    else:
+        st.title("Booking Pending")
+
