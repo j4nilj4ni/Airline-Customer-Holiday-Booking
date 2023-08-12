@@ -3,7 +3,7 @@ import pickle
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
 import requests
-
+import pandas as pd
 
 def lottieurl(url):
     r = requests.get(url)
@@ -30,12 +30,13 @@ selected = option_menu(
 
 # Description
 if selected == 'Data Description':
+    st.title("Welcome to Airline Customer Holiday Booking :airplane:")
     left_column, right_column = st.columns(2)
     lottie = lottieurl(
         "https://lottie.host/304bce08-fcd6-4211-bb21-0d219bcf66ec/ghvL9pmyOK.json")
-
+    
     with left_column:
-        st.title("Welcome to Airline Customer Holiday Booking :airplane:")
+        
         st.write(
             "**Unveiling Customer Preferences and Booking Patterns in the Airline Holiday Indus**")
         st.subheader("About Dataset")
@@ -57,7 +58,67 @@ if selected == 'Data Description':
         st.write("7. With its comprehensive range of attributes, this dataset presents an excellent opportunity for data scientists, researchers, and analysts to gain insights into customer behavior within the airline industry.")
 
     with right_column:
-        st_lottie(lottie, height=300, key="airline_booking")
+        st_lottie(lottie, height=500, key="airline_booking")
+
+    st.write('---')
+    st.subheader("Data Details")
+    data = pd.DataFrame([
+    {
+        'Feature': 'num_passengers',
+        'Description': 'The number of passengers associated with each booking'
+    },
+    {
+        'Feature': 'sales_channel',
+        'Description': 'How customer reached our website'
+    },
+    {
+        'Feature': 'trip_type',
+        'Description': 'Specifies whether the booking is for One Way or Round Trip'
+    },
+    {
+        'Feature': 'purchase_lead',
+        'Description': 'The duration between the booking date and the date of travel'
+    },
+    {
+        'Feature': 'lenght_of_stay',
+        'Description': 'The duration of the holiday stay'
+    },
+    {
+        'Feature': 'flight_hour',
+        'Description': 'Specifies the hour of the flight'
+    },
+    {
+        'Feature': 'flight_day',
+        'Description': 'Indicates the day of the week for the flight'
+    },
+    {
+        'Feature': 'booking_origin',
+        'Description': 'Describes the source of the booking i.e. Country'
+    },
+    {
+        'Feature': 'extra_baggage',
+        'Description': 'Indicates whether the customer expressed a desire for extra baggage allowance'
+    },
+    {
+        'Feature': 'preferred_seat',
+        'Description': 'The seat or location that individuals have chosen as their preferred option'
+    },
+    {
+        'Feature': 'flight_meals',
+        'Description': 'Indicates whether the customer expressed a desire for a meal during the flight'
+    },
+    {
+        'Feature': 'flight_duration',
+        'Description': 'Total duration of the flight'
+    },
+    {
+        'Feature': 'booking_complete',
+        'Description': 'Indicates whether the customer successfully booked a holiday or not'
+    }
+])
+
+    st.table(data)
+
 
 # Prediction
 if selected == 'Prediction':
